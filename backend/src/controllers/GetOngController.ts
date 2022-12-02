@@ -1,31 +1,34 @@
-import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { Request, Response } from 'express'
+import { getRepository } from 'typeorm'
 
-import Ongs from "../models/Ongs";
+import Ongs from '../models/Ongs'
 
-import ongView from '../views/ongView';
+import ongView from '../views/ongView'
 
-class getOngController{
-  async show(req: Request, res: Response) {
-    const { id } = req.params;
+class getOngController {
+    async show(req: Request, res: Response) {
+        const { id } = req.params
 
-    //const middleware = new getOngMiddleware();
+        //const middleware = new getOngMiddleware();
 
-    const repository = getRepository(Ongs);
+        const repository = getRepository(Ongs)
 
-      /**
-       * relations: ['images']
-       * Para retornas as imagens cadastradas
-       */
+        /**
+         * relations: ['images']
+         * Para retornas as imagens cadastradas
+         */
 
-    const ong = await repository.findOneOrFail(id, { relations: ['images']});
+        const ong = await repository.findOneOrFail(id, {
+            relations: ['images', 'patients']
+        })
 
-     if (!ong) {
-      return new Error("Ong does not exists!");
-    }   
+        if (!ong) {
+            return new Error('Ong does not exists!')
+        }
+        console.log(ong)
 
-    return res.json(ongView.render(ong));
-  }
+        return res.json(ongView.render(ong))
+    }
 }
 
-export default new getOngController();
+export default new getOngController()

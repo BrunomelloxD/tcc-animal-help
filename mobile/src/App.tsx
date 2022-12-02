@@ -7,7 +7,7 @@ import {
   Nunito_400Regular,
 } from "@expo-google-fonts/nunito";
 
-import Routes from "./src/routes";
+import Routes from "./routes/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

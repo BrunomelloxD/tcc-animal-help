@@ -6,13 +6,10 @@ import {
   Nunito_800ExtraBold,
   Nunito_400Regular,
 } from "@expo-google-fonts/nunito";
-import { NavigationContainer } from "@react-navigation/native";
-import { AuthProvider } from "./src/contexts/auth";
 
-import Routes from "./src/routes/index";
+import Routes from "./src/routes";
 
 export default function App() {
-
   const [fontsLoaded] = useFonts({
     Nunito_600SemiBold,
     Nunito_700Bold,
@@ -24,11 +21,5 @@ export default function App() {
     return null;
   }
 
-  return (
-    <NavigationContainer>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
-    </NavigationContainer>
-  );
+  return <Routes />;
 }

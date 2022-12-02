@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Image, View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity, Linking } from 'react-native';
+import { Image, View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity, Linking, FlatList } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import mapMarkerImg from '../images/map-marker.png';
 
 import api from '../services/api';
+import { RectButton } from 'react-native-gesture-handler';
+import RegistrationPatient from './CreatePatient/RegistrationPatient';
 
 type OngDetailsRouteParams = {
   id: number;
@@ -48,6 +51,10 @@ export default function OngDetails() {
       </View>
     )
   }
+
+  // function handleNavigateRegistrationPatient() {
+  //   navigation.navigate("RegistrationPatient");
+  // }
 
   function handleOpenGoogleMapsRoutes() {
     Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${ong?.latitude},${ong?.longitude}`)
@@ -128,15 +135,51 @@ export default function OngDetails() {
           }
         </View>
 
-        {/* <RectButton style={styles.contactButtonWhatsApp} onPress={() => { }}>
-          <FontAwesome name="whatsapp" size={24} color="#FFF" />
-          <Text style={styles.contactButtonText}>WhatsApp</Text>
-        </RectButton>
+        {/* <View style={styles.viewButtonCreateOng}>
+          <RectButton
+            style={styles.moreOng}
+            onPress={RegistrationPatient}
+          >
+            <FontAwesome5 name="plus" size={20} color="#FFF" />
+          </RectButton>
+        </View> */}
 
-        <RectButton style={styles.contactButtonFacebook} onPress={() => { }}>
-          <FontAwesome name="facebook" size={24} color="#FFF" />
-          <Text style={styles.contactButtonText}>Facebook</Text>
-        </RectButton> */}
+        <View style={styles.separator} />
+
+        <Text style={styles.title}>Disponíveis para adoção</Text>
+
+        <FlatList
+          data={ongs}
+          style={styles.flatListDetails}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(ongs) => String(ongs.id)}
+          renderItem={({ item: ongs }) => (
+
+          // NOME
+          // DESCRIÇÃO
+          // IMAGE
+          <View style={styles.viewFlatList}>
+            <Text style={styles.textNameOng}>{ongs.name}</Text>
+
+            <View style={styles.viewHourOperating}>
+              <Text style={styles.textDescriptionHourOng}>
+                Horário:
+              </Text>
+              <Text style={styles.textHour}>{ongs.opening_hours}</Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.ButtonGoToOng}
+              onPress={() => handleNavigateToDetailOng(ongs.id)}
+            >
+              <Text style={styles.textButtonGoToOng}>Ver mais detalhes</Text>
+              <FontAwesome5 name="paw" size={16} color="#3f3d56" />
+            </TouchableOpacity>
+            
+          </View>
+        )}
+      />
+
       </View>
     </ScrollView>
   )
@@ -282,5 +325,21 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     marginLeft: 16,
-  }
+  },
+
+  viewButtonCreateOng: {
+    alignItems: "center",
+  },
+
+  moreOng: {
+    backgroundColor: "#15c3d6",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+
+    position: "absolute",
+    bottom: 120,
+  },
 })

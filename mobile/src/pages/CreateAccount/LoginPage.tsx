@@ -12,7 +12,7 @@ import { FontAwesome5, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Input } from "react-native-elements";
 
-import api from "../../services/api";
+import api from '../../services/api';
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -40,6 +40,9 @@ export default function LoginPage() {
       console.log(error);
       return
     }
+
+    
+    navigation.navigate("MapScreen");
   }
 
   function handleNavigateToGoBack() {
