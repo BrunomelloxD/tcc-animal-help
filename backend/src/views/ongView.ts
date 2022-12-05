@@ -2,7 +2,7 @@ import Ong from '../models/Ongs'
 import PatientModel from '../models/Patient'
 
 import imagesView from './imagesView'
-import Patients from './patientView'
+import patientView from './patientView'
 
 export default {
     // Função para retorno de dados para uma ong
@@ -17,7 +17,7 @@ export default {
             opening_hours: ong.opening_hours,
             open_on_weekends: ong.open_on_weekends,
             image: imagesView.renderMany(ong.images),
-            patient: Patients.renderMany(ong.patients)
+            patients: patientView.renderMany(ong.patients)
         }
     },
     /**

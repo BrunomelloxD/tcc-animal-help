@@ -3,7 +3,9 @@ import {
     Column,
     PrimaryGeneratedColumn,
     OneToMany,
-    JoinColumn
+    JoinColumn,
+    OneToOne,
+    ManyToOne
 } from 'typeorm'
 
 import ImagePatient from './ImagePatient'
@@ -26,10 +28,10 @@ export default class Patients {
     @JoinColumn({ name: 'ong_id' })
     images: ImagePatient[]
 
-    // ONG
-    // @OneToMany(() => Ongs, ong => ong.id, {
-    //     cascade: ['insert', 'update']
-    // })
-    // @JoinColumn({ name: 'ong_id' })
-    // ong: Ongs[]
+    @Column({ name: 'ong_id' })
+    ongId: number
+
+    @ManyToOne(() => Ongs, ong => ong.patients)
+    @JoinColumn({ name: 'ong_id' })
+    ong: Ongs
 }

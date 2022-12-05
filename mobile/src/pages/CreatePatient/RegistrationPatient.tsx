@@ -8,13 +8,11 @@ import * as ImagePicker from 'expo-image-picker';
 import api from '../../services/api';
 
 type OngDataRouteParams = {
-  position: {
-    latitude: number;
-    longitude: number;
-  }
+  id_ong: string;
 }
 
 export default function RegistrationPatient() {
+  // const [idOng, setIdOng] = useState('')
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<string[]>([]);
@@ -23,10 +21,17 @@ export default function RegistrationPatient() {
   const route = useRoute();
   const params = route.params as OngDataRouteParams;
 
+  // APAGAR justATest
+  function justATest() {
+    navigation.navigate("SelectMapPosition");
+  }
+
   async function handleCreateOng() {
+    const id_ong = params.id_ong;
     
     const data = new FormData();
-    
+  
+    data.append('id', String(id_ong));
     data.append('name', name);
     data.append('description', description);
 
@@ -39,18 +44,14 @@ export default function RegistrationPatient() {
     })
 
     try {
-      await api.post('ongs', data);
-      // await fetch('http://192.168.0.199:3000/ongs', {
-      //   method: 'POST',
-      //   body: data,
-      // })
+      await api.post('patient', data);
     } catch (error) {
       console.log(error);
       return
     }
     
     // Arrumar
-    navigation.navigate('');
+    navigation.navigate('SelectMapPosition');
   }
 
   async function handleSelectImages() {
@@ -79,7 +80,7 @@ export default function RegistrationPatient() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ padding: 24 }}>
-      <Text style={styles.title}>Dados</Text>
+      <Text style={styles.name}>Cadastro do paciente</Text>
 
       <Text style={styles.label}>Nome</Text>
       <TextInput
@@ -88,7 +89,7 @@ export default function RegistrationPatient() {
         onChangeText={setName}
       />
 
-      <Text style={styles.label}>Sobre</Text>
+      <Text style={styles.label}>Descrição</Text>
       <TextInput
         style={[styles.input, { height: 110 }]}
         multiline
@@ -124,7 +125,7 @@ export default function RegistrationPatient() {
         </TouchableOpacity>
       </View>
 
-      <RectButton style={styles.nextButton} onPress={handleCreateOng}>
+      <RectButton style={styles.nextButton} onPress={justATest}>
         <Text style={styles.nextButtonText}>Cadastrar</Text>
       </RectButton>
     </ScrollView>
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  title: {
+  name: {
     color: '#5c8599',
     fontSize: 24,
     fontFamily: 'Nunito_700Bold',

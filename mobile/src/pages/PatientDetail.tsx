@@ -1,27 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity, Linking, FlatList } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Feather } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-import mapMarkerImg from '../images/map-marker.png';
 
 import api from '../services/api';
-// import { RectButton } from 'react-native-gesture-handler';
-// import RegistrationPatient from './CreatePatient/RegistrationPatient';
-
-// SOMENTE PARA TESTE
-// NOME
-// DESCRIÇÃO
-// IMAGE
-
-let patient: Array<{id: number, name: string, description: string}> = Array (
-  {'id': 1, 'name': 'test1', 'description': 'description1'},
-  {'id': 2, 'name': 'test2', 'description': 'description2'},
-  {'id': 3, 'name': 'test3', 'description': 'description3'},
-);
 
 type OngDetailsRouteParams = {
   id: number;
@@ -45,7 +26,6 @@ type Ong = {
 export default function OngDetails() {
   const route = useRoute();
   const [ong, setOng] = useState<Ong>();
-  const navigation = useNavigation();
 
   const params = route.params as OngDetailsRouteParams;
 
@@ -65,14 +45,6 @@ export default function OngDetails() {
     )
   }
 
-  function handleNavigateRegistrationPatient() {
-    navigation.navigate("RegistrationPatient");
-  }
-
-  function handleOpenGoogleMapsRoutes() {
-    Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${ong?.latitude},${ong?.longitude}`)
-  }
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imagesContainer}>
@@ -90,109 +62,8 @@ export default function OngDetails() {
       </View>
 
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{ong.name}</Text>
-        <Text style={styles.description}>{ong.about}</Text>
-
-        <View style={styles.mapContainer}>
-          <MapView
-            provider={PROVIDER_GOOGLE}
-            initialRegion={{
-              latitude: -21.4683742,
-              longitude: -47.0063995,
-              latitudeDelta: 0.008,
-              longitudeDelta: 0.008,
-            }}
-            zoomEnabled={false}
-            pitchEnabled={false}
-            scrollEnabled={false}
-            rotateEnabled={false}
-            style={styles.mapStyle}
-          >
-            <Marker
-              icon={mapMarkerImg}
-              coordinate={{
-                latitude: ong.latitude,
-                longitude: ong.longitude,
-              }}
-            />
-          </MapView>
-
-          <TouchableOpacity onPress={handleOpenGoogleMapsRoutes} style={styles.routesContainer}>
-            <Text style={styles.routesText}>Ver rotas no Google Maps</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.separator} />
-
-        <Text style={styles.title}>Instruções para visita</Text>
-        <Text style={styles.description}>{ong.instructions}</Text>
-
-        <View style={styles.scheduleContainer}>
-          <View style={[styles.scheduleItem, styles.scheduleItemBlue]}>
-            <Feather name="clock" size={40} color="#2AB5D1" />
-            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>Segunda à Sexta {ong.opening_hours}</Text>
-          </View>
-
-          {ong.open_on_weekends ? (
-            <View style={[styles.scheduleItem, styles.scheduleItemGreen]}>
-              <Feather name="info" size={40} color="#39CC83" />
-              <Text style={[styles.scheduleText, styles.scheduleTextGreen]}>Atendemos fim de semana</Text>
-            </View>
-          ) : (
-            <View style={[styles.scheduleItem, styles.scheduleItemRed]}>
-              <Feather name="info" size={40} color="#FF669D" />
-              <Text style={[styles.scheduleText, styles.scheduleTextRed]}>Não atendemos fim de semana</Text>
-            </View>
-          )
-
-          }
-        </View>
-
-        {/* <View style={styles.viewButtonCreateOng}>
-          <RectButton
-            style={styles.moreOng}
-            onPress={RegistrationPatient}
-          >
-            <FontAwesome5 name="plus" size={20} color="#FFF" />
-          </RectButton>
-        </View> */}
-
-        {/* PATIENT */}
-
-        <View style={styles.separator} />
-
-        <Text style={styles.title}>Disponíveis para adoção</Text>
-
-        <FlatList
-          data={patient}
-          style={styles.flatListDetails}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(ongs) => String(ongs.id)}
-          renderItem={({ item: ongs }) => (
-
-          // NOME
-          // DESCRIÇÃO
-          <View style={styles.viewFlatList}>
-            <Text style={styles.textNamePatient}>PATIENT NAME</Text>
-
-            <View style={styles.viewHourOperating}>
-              <Text style={styles.textDescriptionPatient}>
-                DESCRIÇÃO
-              </Text>
-            </View>
-
-            <TouchableOpacity
-              style={styles.ButtonGoToOng}
-              onPress={handleNavigateRegistrationPatient}
-            >
-              <Text style={styles.textButtonGoToPatient}>Ver mais detalhes</Text>
-              <FontAwesome5 name="paw" size={16} color="#3f3d56" />
-            </TouchableOpacity>
-            
-          </View>
-        )}
-      />
-
+        <Text style={styles.title}>PATIENT NAME</Text>
+        <Text style={styles.description}>DESCRIÇÃO</Text>
       </View>
     </ScrollView>
   )

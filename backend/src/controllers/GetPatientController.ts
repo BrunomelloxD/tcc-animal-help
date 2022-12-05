@@ -5,29 +5,31 @@ import Patients from '../models/Patient'
 
 import patientView from '../views/patientView'
 
-class getOngController {
+class getPatientController {
     async show(req: Request, res: Response) {
         const { id } = req.params
 
-        //const middleware = new getOngMiddleware();
+        try {
+            const repository = getRepository(Patients)
 
-        const repository = getRepository(Patients)
+            /**
+             * relations: ['images']
+             * Para retornas as imagens cadastradas
+             */
 
-        /**
-         * relations: ['images']
-         * Para retornas as imagens cadastradas
-         */
+            const ong = await repository.findOne(id, {
+                relations: ['images']
+            })
 
-        const ong = await repository.findOneOrFail(id, {
-            relations: ['images']
-        })
+            if (!ong) {
+                return res.status(404).send({ info: 'Patient nao encontrada' })
+            }
 
-        if (!ong) {
-            return new Error('Ong does not exists!')
+            return res.json(patientView.render(ong))
+        } catch (e) {
+            console.log(e)
         }
-
-        return res.json(patientView.render(ong))
     }
 }
 
-export default new getOngController()
+export default new getPatientController()

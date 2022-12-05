@@ -9,8 +9,6 @@ class getOngController {
     async show(req: Request, res: Response) {
         const { id } = req.params
 
-        //const middleware = new getOngMiddleware();
-
         const repository = getRepository(Ongs)
 
         /**
@@ -18,15 +16,15 @@ class getOngController {
          * Para retornas as imagens cadastradas
          */
 
-        const ong = await repository.findOneOrFail(id, {
-            relations: ['images', 'patients']
+        const ong = await repository.findOne(id, {
+            relations: ['images', 'patients', 'patients.images']
         })
 
         if (!ong) {
-            return new Error('Ong does not exists!')
+            return res.status(404).send({ info: 'Ong nao encontrada' })
         }
-        console.log(ong)
 
+        console.log('ong', ong)
         return res.json(ongView.render(ong))
     }
 }

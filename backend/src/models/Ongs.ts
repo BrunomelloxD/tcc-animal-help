@@ -61,10 +61,8 @@ export default class Ongs {
     @JoinColumn({ name: 'ong_id' })
     images: Image[]
 
-    // CASES
-    @OneToMany(() => Patients, patients => patients.ong, {
-        cascade: ['insert', 'update']
-    })
+    // Patients
+    @OneToMany(() => Patients, patients => patients.ong)
     @JoinColumn({ name: 'ong_id' })
     patients: Patients[]
 }
