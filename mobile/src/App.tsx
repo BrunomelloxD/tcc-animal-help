@@ -8,8 +8,10 @@ import {
 } from "@expo-google-fonts/nunito";
 
 import Routes from "./routes/routes";
+import { LogBox } from "react-native";
 
 export default function App() {
+  LogBox.ignoreLogs(['EventEmitter.removeListener'])
   const [fontsLoaded] = useFonts({
     Nunito_600SemiBold,
     Nunito_700Bold,

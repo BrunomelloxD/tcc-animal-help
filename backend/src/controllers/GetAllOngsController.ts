@@ -14,7 +14,7 @@ class GetAllOngsController {
          * Para retornas as imagens cadastradas
          */
         const ongs = await repository.find({
-            relations: ['images']
+            relations: ['images', 'patients', 'patients.images']
         })
 
         return res.json(ongView.renderMany(ongs))
