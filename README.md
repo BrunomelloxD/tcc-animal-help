@@ -1,4 +1,4 @@
-<h1 align="center">Animal Help:feet:</h1>
+<h1 align="center">Animal Help :feet:</h1>
 <p align="center">Obs: Ainda em desenvolvimento.<br/></p>
 
 Instruções de Instalação
