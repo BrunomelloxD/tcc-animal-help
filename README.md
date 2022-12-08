@@ -20,5 +20,11 @@ Instruções de Instalação
 * 3.4) `yarn start` inicie seu projeto. **Obs: caso tenha problemas com permissão abre o terminal como adminstrador.**
 * 3.5) Rode o projeto diretamente em seu emulador ou baixe o `Expo Go` em seu celular. Doc: `https://docs.expo.dev/workflow/expo-go/`
 
-Feito com :purple_heart:	 por [Bruno Mello.](https://www.linkedin.com/in/bruno-mello-14058819b/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BIBMlTz6fSoaFIdcA5Dyn0Q%3D%3D&licu=urn%3Ali%3Acontrol%3Ad_flagship3_feed-nav.settings_view_profile)	:eyes:
+## 🚀 Tecnologias
 
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Node.js](https://nodejs.org/en/)
+- [React Native](https://facebook.github.io/react-native/)
+- [Expo](https://expo.io/)
+- [TypeScript](https://www.typescriptlang.org/)
