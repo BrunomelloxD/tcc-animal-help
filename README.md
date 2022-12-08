@@ -18,7 +18,7 @@ Instruções de Instalação
 * 3.2) `cd mobile/` - CD no diretório mobile
 * 3.3) Instale os pacotes: `yarn install` ou `npm install`
 * 3.4) `yarn start` inicie seu projeto. **Obs: caso tenha problemas com permissão abre o terminal como adminstrador.**
-* 3.5) Rode o projeto diretamente em seu emulador ou baixe o `Expo Go` em seu celular. Doc: `https://docs.expo.dev/workflow/expo-go/`
+* 3.5) Rode o projeto diretamente em seu emulador ou baixe o `Expo Go` em seu celular. Doc: `https://docs.expo.dev/workflow/run-on-device`
 
 ## 🚀 Tecnologias
 
