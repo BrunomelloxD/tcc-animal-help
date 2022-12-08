@@ -9,14 +9,14 @@ Instruções de Instalação
 **2) Backend - Instruções de instalação**
 * 2.2) `cd tcc-animal-help/` - CD no diretório recém-criado.
 * 2.3) `cd backend/` - CD no diretório backend
-* 2.5) Na raiz do projeto crie um arquivo `.env` e baixe o arquivo como referência: `https://pastebin.com/zxZ3QjbC`
-* 2.6) Instale os pacotes necessários: `yarn install` ou `npm install`
+* 2.5) Na raiz do projeto crie um arquivo `.env` use o link como referência: `https://pastebin.com/zxZ3QjbC`
+* 2.6) Instale os pacotes: `yarn install` ou `npm install`
 * 2.7) Inicie seu projeto: `yarn dev`
 
 **3) Mobile - Instruções de instalação**
 * 3.1) `cd tcc-animal-help/` - CD no diretório recém-criado.
 * 3.2) `cd mobile/` - CD no diretório mobile
-* 3.3) Instale os pacotes necessários: `yarn install` ou `npm install`
+* 3.3) Instale os pacotes: `yarn install` ou `npm install`
 * 3.4) `yarn start` inicie seu projeto. **Obs: caso tenha problemas com permissão abre o terminal como adminstrador.**
 * 3.5) Rode o projeto diretamente em seu emulador ou baixe o `Expo Go` em seu celular. Doc: `https://docs.expo.dev/workflow/expo-go/`
 
