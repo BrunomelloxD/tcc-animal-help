@@ -3,7 +3,7 @@
 
 Instruções de Instalação
 =================
-**1) Clone e repositório:**
+**1) Clone o repositório:**
 * 1.1) `git clone https://github.com/BrunomelloxD/tcc-animal-help.git`
 
 **2) Backend - Instruções de instalação**
