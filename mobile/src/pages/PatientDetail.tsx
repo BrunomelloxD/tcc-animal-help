@@ -8,43 +8,39 @@ import {
     Dimensions
 } from 'react-native'
 import { useRoute } from '@react-navigation/native'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 import api from '../services/api'
 
-type OngDetailsRouteParams = {
+type PatientDetailsRouteParams = {
     id: number
 }
 
-type Ong = {
+type Patient = {
     id: number
     name: string
-    latitude: number
-    longitude: number
-    about: string
-    instructions: string
-    opening_hours: string
-    open_on_weekends: boolean
+    description: string
     image: Array<{
         id: number
         url: string
     }>
 }
 
-export default function OngDetails() {
+export default function PatientDetails() {
     const route = useRoute()
-    const [ong, setOng] = useState<Ong>()
+    const [patient, setPatient] = useState<Patient>()
 
-    const params = route.params as OngDetailsRouteParams
+    const params = route.params as PatientDetailsRouteParams
 
     useEffect(() => {
-        api.get(`ongs/${params.id}`).then(response => {
-            setOng(response.data)
+        api.get(`listPatients/${params.id}`).then(response => {
+            setPatient(response.data)
 
-            console.log(ong)
+            console.log(patient)
         })
     }, [params.id])
 
-    if (!ong) {
+    if (!patient) {
         return (
             <View style={styles.container}>
                 <Text style={styles.description}>Carregando...</Text>
@@ -56,12 +52,12 @@ export default function OngDetails() {
         <ScrollView style={styles.container}>
             <View style={styles.imagesContainer}>
                 <ScrollView horizontal pagingEnabled>
-                    {ong.image.map(image => {
+                    {patient.image.map(patient => {
                         return (
                             <Image
-                                key={image.id}
+                                key={patient.id}
                                 style={styles.image}
-                                source={{ uri: image.url }}
+                                source={{ uri: patient.url }}
                             />
                         )
                     })}
@@ -69,8 +65,16 @@ export default function OngDetails() {
             </View>
 
             <View style={styles.detailsContainer}>
-                <Text style={styles.title}>PATIENT NAME</Text>
-                <Text style={styles.description}>DESCRIÇÃO</Text>
+                <Text style={styles.title}>{patient.name}</Text>
+                <Text style={styles.description}>{patient.description}</Text>
+
+                <View style={styles.separatorView}>
+                    <View style={styles.separator} />
+                    <Text style={styles.title}>
+                        Adote!{' '}
+                        <FontAwesome5 name="heart" size={26} color="#c4302b" />
+                    </Text>
+                </View>
             </View>
         </ScrollView>
     )
@@ -108,20 +112,6 @@ const styles = StyleSheet.create({
         marginTop: 16
     },
 
-    mapContainer: {
-        borderRadius: 20,
-        // overflow: 'hidden',
-        borderWidth: 1.2,
-        borderColor: '#B3DAE2',
-        marginTop: 40,
-        backgroundColor: '#E6F7FB'
-    },
-
-    mapStyle: {
-        width: '100%',
-        height: 200
-    },
-
     routesContainer: {
         padding: 16,
         alignItems: 'center',
@@ -140,100 +130,16 @@ const styles = StyleSheet.create({
         marginVertical: 40
     },
 
+    separatorView: {
+        bottom: 0,
+        alignItems: 'center'
+    },
+
     scheduleContainer: {
         marginTop: 24,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-
-    scheduleItem: {
-        width: '48%',
-        padding: 20
-    },
-
-    scheduleItemBlue: {
-        backgroundColor: '#E6F7FB',
-        borderWidth: 1,
-        borderColor: '#B3DAE2',
-        borderRadius: 10
-    },
-
-    scheduleItemGreen: {
-        backgroundColor: '#EDFFF6',
-        borderWidth: 1,
-        borderColor: '#A1E9C5',
-        borderRadius: 10
-    },
-
-    scheduleItemRed: {
-        backgroundColor: '#FEF6F9',
-        borderWidth: 1,
-        borderColor: '#FFBCD4',
-        borderRadius: 20
-    },
-
-    scheduleText: {
-        fontFamily: 'Nunito_600SemiBold',
-        fontSize: 16,
-        lineHeight: 24,
-        marginTop: 20
-    },
-
-    scheduleTextBlue: {
-        color: '#5C8599'
-    },
-
-    scheduleTextGreen: {
-        color: '#37C77F'
-    },
-
-    scheduleTextRed: {
-        color: '#FF669D'
-    },
-
-    contactButtonWhatsApp: {
-        backgroundColor: '#3CDC8C',
-        borderRadius: 10,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 56,
-        marginTop: 40
-    },
-
-    contactButtonFacebook: {
-        backgroundColor: '#0b84ed',
-        borderRadius: 10,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 56,
-        marginTop: 10
-    },
-
-    contactButtonText: {
-        fontFamily: 'Nunito_800ExtraBold',
-        color: '#FFF',
-        fontSize: 18,
-        marginLeft: 16
-    },
-
-    viewButtonCreateOng: {
-        alignItems: 'center'
-    },
-
-    moreOng: {
-        backgroundColor: '#15c3d6',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 60,
-        width: 60,
-        borderRadius: 30,
-
-        position: 'absolute',
-        bottom: 120
-    },
-    // FLATLIST
 
     flatListDetails: {
         borderRadius: 12,

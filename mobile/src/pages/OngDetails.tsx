@@ -50,10 +50,12 @@ type Ong = {
 
 export default function OngDetails() {
     const route = useRoute()
-    const [ong, setOng] = useState<Ong>()
     const navigation = useNavigation()
 
+    const [ong, setOng] = useState<Ong>()
+
     const params = route.params as OngDetailsRouteParams
+    const ongId = params.id
 
     // Ong data
     useEffect(() => {
@@ -77,11 +79,12 @@ export default function OngDetails() {
         )
     }
 
-    const ongId = params.id
-    // console.log(ongId)
-
     function handleNavigateRegistrationPatient() {
         navigation.navigate('RegistrationPatient', { ongId })
+    }
+
+    function handleNavigatePatientDetail(id: number) {
+        navigation.navigate('PatientDetails', { id })
     }
 
     function handleOpenGoogleMapsRoutes() {
@@ -206,43 +209,22 @@ export default function OngDetails() {
                 <View style={styles.separator} />
                 <Text style={styles.title}>Disponíveis para adoção</Text>
 
-                {console.log('Abelha', ong.patients)}
-
                 <FlatList
                     data={ong.patients}
                     style={styles.flatListDetails}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={ongs => String(ongs.id)}
                     renderItem={({ item: patients }) => {
-                        console.log('Abelha2', patients)
-
                         return (
                             <View style={styles.viewFlatList}>
-                                <ScrollView horizontal pagingEnabled>
-                                    {patients.image.map(image => {
-                                        return (
-                                            <Image
-                                                key={image.id}
-                                                style={styles.image}
-                                                source={{ uri: image.url }}
-                                            />
-                                        )
-                                    })}
-                                </ScrollView>
-
                                 <Text style={styles.textNamePatient}>
                                     {patients.name}
                                 </Text>
-
-                                <View style={styles.viewHourOperating}>
-                                    <Text style={styles.textDescriptionPatient}>
-                                        {patients.description}
-                                    </Text>
-                                </View>
-
-                                {/* <TouchableOpacity
-                                    style={styles.ButtonGoToOng}
-                                    onPress={handleNavigateRegistrationPatient}
+                                <TouchableOpacity
+                                    style={styles.ButtonGoToPatientDetail}
+                                    onPress={() =>
+                                        handleNavigatePatientDetail(patients.id)
+                                    }
                                 >
                                     <Text style={styles.textButtonGoToPatient}>
                                         Ver mais detalhes
@@ -252,15 +234,15 @@ export default function OngDetails() {
                                         size={16}
                                         color="#3f3d56"
                                     />
-                                </TouchableOpacity> */}
+                                </TouchableOpacity>
                             </View>
                         )
                     }}
                 />
 
-                <View style={styles.viewButtonCreateOng}>
+                <View style={styles.viewButtonCreatePatient}>
                     <TouchableOpacity
-                        style={styles.moreOng}
+                        style={styles.morePatient}
                         onPress={handleNavigateRegistrationPatient}
                     >
                         <FontAwesome5 name="plus" size={20} color="#FFF" />
@@ -305,7 +287,7 @@ const styles = StyleSheet.create({
 
     mapContainer: {
         borderRadius: 20,
-        // overflow: 'hidden',
+        overflow: 'hidden',
         borderWidth: 1.2,
         borderColor: '#B3DAE2',
         marginTop: 40,
@@ -413,11 +395,11 @@ const styles = StyleSheet.create({
         marginLeft: 16
     },
 
-    viewButtonCreateOng: {
+    viewButtonCreatePatient: {
         alignItems: 'center'
     },
 
-    moreOng: {
+    morePatient: {
         backgroundColor: '#15c3d6',
         justifyContent: 'center',
         alignItems: 'center',
@@ -442,13 +424,10 @@ const styles = StyleSheet.create({
 
         marginTop: 6,
         marginBottom: 2,
-        padding: 4
+        padding: 8
     },
 
     textNamePatient: {
-        paddingBottom: 5,
-        padding: 10,
-
         fontFamily: 'Nunito_800ExtraBold',
         fontSize: 18,
         color: '#15c3d6'
@@ -460,15 +439,12 @@ const styles = StyleSheet.create({
     },
 
     textDescriptionPatient: {
-        padding: 10,
-        paddingTop: 0,
-
         fontFamily: 'Nunito_600SemiBold',
         fontSize: 16,
         color: '#3f3d56'
     },
 
-    ButtonGoToOng: {
+    ButtonGoToPatientDetail: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

@@ -1,27 +1,28 @@
-import React from "react";
-import { useFonts } from "expo-font";
+import React from 'react'
+import { useFonts } from 'expo-font'
 import {
-  Nunito_600SemiBold,
-  Nunito_700Bold,
-  Nunito_800ExtraBold,
-  Nunito_400Regular,
-} from "@expo-google-fonts/nunito";
-
-import Routes from "./routes/routes";
-import { LogBox } from "react-native";
-
-export default function App() {
-  LogBox.ignoreLogs(['EventEmitter.removeListener'])
-  const [fontsLoaded] = useFonts({
     Nunito_600SemiBold,
     Nunito_700Bold,
     Nunito_800ExtraBold,
-    Nunito_400Regular,
-  });
+    Nunito_400Regular
+} from '@expo-google-fonts/nunito'
 
-  if (!fontsLoaded) {
-    return null;
-  }
+import Routes from './routes/routes'
+import { LogBox } from 'react-native'
 
-  return <Routes />;
+export default function App() {
+    LogBox.ignoreLogs(['Warning: ...']) // Ignore log notification by message
+    LogBox.ignoreAllLogs() //Ignore all log notifications
+    const [fontsLoaded] = useFonts({
+        Nunito_600SemiBold,
+        Nunito_700Bold,
+        Nunito_800ExtraBold,
+        Nunito_400Regular
+    })
+
+    if (!fontsLoaded) {
+        return null
+    }
+
+    return <Routes />
 }
