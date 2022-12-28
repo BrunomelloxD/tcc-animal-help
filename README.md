@@ -1,6 +1,25 @@
 <h1 align="center">Animal Help :feet:</h1>
 <p align="center">O objetivo deste projeto é desenvolver um software para ajudar na divulgação de ONGs que tem como visão ajudar animais.<br/>O sistema nomeado deverá auxiliar na divulgação de animais acolhidos disponíveis para adoção e, também, para divulgação de trabalhos feitos pelas ONGs de animais.</p>
 
+<table align=center>
+  <tr>
+    <td align=center>Splash screen</td>
+    <td align=center>First page - Onboarding</td>
+    <td align=center>Login user page</td>
+  </tr>
+  <tr>
+    <td>
+      <img align=top src=".github/Screenshot_01.jpg" alt="Random Number" width=200 >
+     </td>
+    <td>
+      <img align=center src=".github/Screenshot_02.jpg" alt="Random Number" width=200 >
+     </td>
+    <td>
+      <img align=top src=".github/Screenshot_03.jpg" alt="Random Number" width=200 >
+    </td>
+  </tr>
+</table>
+
 Instruções de Instalação
 =================
 **1) Clone o repositório:**
