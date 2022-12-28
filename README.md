@@ -1,5 +1,5 @@
 <h1 align="center">Animal Help :feet:</h1>
-<p align="center">Obs: Ainda em desenvolvimento.<br/></p>
+<p align="center">O objetivo deste projeto é desenvolver um software para ajudar na divulgação de ONGs que tem como visão ajudar animais.<br/>O sistema nomeado deverá auxiliar na divulgação de animais acolhidos disponíveis para adoção e, também, para divulgação de trabalhos feitos pelas ONGs de animais.</p>
 
 Instruções de Instalação
 =================
